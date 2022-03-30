@@ -14,7 +14,7 @@ const SignIn = () => {
           </h4>
           <p>
             If there is interest for this a project, I will improve it until it becomes as seamless as pushing a commit
-            to earn Bitcoin for your work
+            in order to earn Bitcoin for your work
           </p>
         </Row>
       </Container>
