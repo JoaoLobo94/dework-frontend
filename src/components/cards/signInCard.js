@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SignInCard = () => {
@@ -16,8 +16,13 @@ const SignInCard = () => {
   const [validated, setValidated] = useState(false);
   const history = useNavigate();
   const signInForm = { email: email, password: password };
-  const signUpForm = { name: name, password: password, job: job, password_confirmation: passwordConfirmation };
-
+  const signUpForm = {
+    name: name,
+    password: password,
+    job: job,
+    password_confirmation: passwordConfirmation,
+    email: email,
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,32 +38,36 @@ const SignInCard = () => {
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/sign_in`, signInForm)
         .then((res) => {
           if (res.status === 200) {
-            history("/dashboard")
-            
+            history("/dashboard");
           }
-          console.log(res.status);
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
       axios
-      .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/`, signUpForm)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/`, signUpForm)
+        .then((res) => {
+          if (res.status === 200) {
+            history("/dashboard");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
   const checkMatchingPasswords = () => {
     if (password !== passwordConfirmation) {
+      if (password.length < 6) {
+        return "Password must have more than 6 characters";
+      }
       return "The passwords do not match";
     } else {
       return "Submit registration";
     }
   };
+
   const disableButton = () => {
     if (checkMatchingPasswords() === "Submit registration") {
       return false;
