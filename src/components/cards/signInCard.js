@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 const SignInCard = () => {
@@ -13,6 +14,7 @@ const SignInCard = () => {
   const [job, setJob] = useState("");
   const [name, setName] = useState("");
   const [validated, setValidated] = useState(false);
+  const history = useNavigate();
   const signInForm = { email: email, password: password };
   const signUpForm = { name: name, password: password, job: job, password_confirmation: passwordConfirmation };
 
@@ -30,7 +32,11 @@ const SignInCard = () => {
       axios
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/sign_in`, signInForm)
         .then((res) => {
-          console.log(res);
+          if (res.status === 200) {
+            history("/dashboard")
+            
+          }
+          console.log(res.status);
         })
         .catch((err) => {
           console.log(err);
