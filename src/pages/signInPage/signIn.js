@@ -1,8 +1,8 @@
 import "./signIn.css";
-import SignInCard from "../components/cards/signInCard";
+import SignInCard from "../../components/cards/signInCard";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import BitcoinDonation from "../images/address.png";
+import BitcoinDonation from "../../assets/images/address.png";
 
 const SignIn = () => {
   return (
