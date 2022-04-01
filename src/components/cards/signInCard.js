@@ -38,6 +38,7 @@ const SignInCard = () => {
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/sign_in`, signInForm)
         .then((res) => {
           if (res.status === 200) {
+            // store token in redux
             history("/dashboard");
           }
         })

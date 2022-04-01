@@ -25,11 +25,11 @@ const SignIn = () => {
           <SignInCard />
         </Row>
       </Container>
-      <Container className="justify-content-center mt-5">
-        <h1 className="d-flex justify-content-center">Donate</h1>
-        <p className="d-flex justify-content-center">bc1qxugylzf53rapk39cpmfhwm8cxk4j2yn96j0ycn</p>
+      <Container className="justify-content-center mt-3">
+        <h2 className="d-flex justify-content-center">Donate</h2>
         <Row className="justify-content-center">
           <img className="bitcoin-address" src={BitcoinDonation} alt="Single Addr" />
+          <p className="d-flex justify-content-center">bc1qxugylzf53rapk39cpmfhwm8cxk4j2yn96j0ycn</p>
         </Row>
       </Container>
     </div>
