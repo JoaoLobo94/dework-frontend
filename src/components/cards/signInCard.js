@@ -5,6 +5,8 @@ import Nav from "react-bootstrap/Nav";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../store/actions/index";
 
 const SignInCard = () => {
   const [tab, setTab] = useState("signIn");
@@ -23,6 +25,7 @@ const SignInCard = () => {
     password_confirmation: passwordConfirmation,
     email: email,
   };
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,23 +41,26 @@ const SignInCard = () => {
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/sign_in`, signInForm)
         .then((res) => {
           if (res.status === 200) {
-            // store token in redux
+            dispatch(setToken(res.headers["access-token"]));
             history("/dashboard");
           }
         })
         .catch((err) => {
           console.log(err);
+          window.location.reload();
         });
     } else {
       axios
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/`, signUpForm)
         .then((res) => {
           if (res.status === 200) {
+            dispatch(setToken(res.headers["access-token"]));
             history("/dashboard");
           }
         })
         .catch((err) => {
           console.log(err);
+          window.location.reload();
         });
     }
   };
