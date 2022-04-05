@@ -30,7 +30,7 @@ const SignIn = () => {
         <Row className="justify-content-center">
           <img className="bitcoin-address" src={BitcoinDonation} alt="Single Addr" />
           <p className="d-flex justify-content-center">bc1qxugylzf53rapk39cpmfhwm8cxk4j2yn96j0ycn</p>
-          <p className="d-flex justify-content-center">Contact: </p>
+          <p className="d-flex justify-content-center">Contact all issues: </p>
         </Row>
       </Container>
     </div>

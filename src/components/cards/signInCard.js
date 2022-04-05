@@ -26,6 +26,7 @@ const SignInCard = () => {
     email: email,
   };
   const dispatch = useDispatch();
+  const credentials = {token: '', client: '', email: ''}
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +42,10 @@ const SignInCard = () => {
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/sign_in`, signInForm)
         .then((res) => {
           if (res.status === 200) {
-            dispatch(setToken(res.headers["access-token"]));
+            credentials.token = res.headers["access-token"]
+            credentials.client = res.headers["client"]
+            credentials.email = signInForm.email
+            dispatch(setToken(credentials));
             history("/dashboard");
           }
         })
@@ -54,7 +58,10 @@ const SignInCard = () => {
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/`, signUpForm)
         .then((res) => {
           if (res.status === 200) {
-            dispatch(setToken(res.headers["access-token"]));
+            credentials.token = res.headers["access-token"]
+            credentials.client = res.headers["client"]
+            credentials.email = signInForm.email
+            dispatch(setToken(credentials));
             history("/dashboard");
           }
         })
