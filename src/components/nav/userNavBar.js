@@ -2,7 +2,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from "react-bootstrap/Container";
 
-const DashboardNavBar = () => {
+const UserNavBar = () => {
   return (
     <div>
       <Navbar  sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -15,7 +15,7 @@ const DashboardNavBar = () => {
               <Nav.Link href="#pricing">Contributions</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets">Your Balance</Nav.Link>
+              <Nav.Link href="#deets">Your Balance: </Nav.Link>
               <Nav.Link eventKey={2} href="#memes">
                 Logout
               </Nav.Link>
@@ -27,4 +27,4 @@ const DashboardNavBar = () => {
   );
 };
 
-export default DashboardNavBar;
+export default UserNavBar;

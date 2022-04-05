@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../store/actions/index";
+import { setToken, setUser } from "../../store/actions/index";
 
 const SignInCard = () => {
   const [tab, setTab] = useState("signIn");
@@ -26,7 +26,9 @@ const SignInCard = () => {
     email: email,
   };
   const dispatch = useDispatch();
-  const credentials = {token: '', client: '', email: ''}
+  let credentials = {token: '', client: ''}
+  let user = {}
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,9 +46,10 @@ const SignInCard = () => {
           if (res.status === 200) {
             credentials.token = res.headers["access-token"]
             credentials.client = res.headers["client"]
-            credentials.email = signInForm.email
+            user = res.data.data
             dispatch(setToken(credentials));
-            history("/dashboard");
+            dispatch(setUser(user));
+            history("/companies");
           }
         })
         .catch((err) => {
@@ -60,9 +63,10 @@ const SignInCard = () => {
           if (res.status === 200) {
             credentials.token = res.headers["access-token"]
             credentials.client = res.headers["client"]
-            credentials.email = signInForm.email
+            user = res.data.data
             dispatch(setToken(credentials));
-            history("/dashboard");
+            dispatch(setUser(user));
+            history("/companies");
           }
         })
         .catch((err) => {
