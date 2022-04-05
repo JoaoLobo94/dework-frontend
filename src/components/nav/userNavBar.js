@@ -1,8 +1,12 @@
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from "react-bootstrap/Container";
+import { useDispatch } from "react-redux";
+
 
 const UserNavBar = () => {
+  const dispatch = useDispatch();
+  dispatch(signOut());
   return (
     <div>
       <Navbar  sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -11,12 +15,13 @@ const UserNavBar = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">Companies</Nav.Link>
-              <Nav.Link href="#pricing">Contributions</Nav.Link>
+              <Nav.Link href="">Companies</Nav.Link>
+              <Nav.Link>|</Nav.Link>
+              <Nav.Link href="">Contributions</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link href="#deets">Your Balance: </Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
+              <Nav.Link>
                 Logout
               </Nav.Link>
             </Nav>
