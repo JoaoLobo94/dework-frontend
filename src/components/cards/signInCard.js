@@ -47,6 +47,7 @@ const SignInCard = () => {
             credentials.token = res.headers["access-token"]
             credentials.client = res.headers["client"]
             user = res.data.data
+            localStorage.setItem('token', credentials.token)
             dispatch(setToken(credentials));
             dispatch(setUser(user));
             history("/companies");
@@ -64,6 +65,7 @@ const SignInCard = () => {
             credentials.token = res.headers["access-token"]
             credentials.client = res.headers["client"]
             user = res.data.data
+            localStorage.setItem('token', credentials.token)
             dispatch(setToken(credentials));
             dispatch(setUser(user));
             history("/companies");

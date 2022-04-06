@@ -2,11 +2,17 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from "react-bootstrap/Container";
 import { useDispatch } from "react-redux";
+import { signOut } from "../../store/actions/index";
 
 
 const UserNavBar = () => {
   const dispatch = useDispatch();
-  dispatch(signOut());
+  const logOutAction = () => {
+    dispatch(signOut())
+    localStorage.removeItem('token')
+    window.location.reload()
+  }
+
   return (
     <div>
       <Navbar  sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -16,12 +22,11 @@ const UserNavBar = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="">Companies</Nav.Link>
-              <Nav.Link>|</Nav.Link>
               <Nav.Link href="">Contributions</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link href="#deets">Your Balance: </Nav.Link>
-              <Nav.Link>
+              <Nav.Link onClick={() => logOutAction() }>
                 Logout
               </Nav.Link>
             </Nav>

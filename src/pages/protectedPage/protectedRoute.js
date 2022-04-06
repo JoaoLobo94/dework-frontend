@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
 const useAuth = () => {
-  const credentials = useSelector((state) => state.token.token);
+  let credentials = localStorage.getItem('token')
+  console.log(credentials)
   const userLogged = { loggedIn: false };
-  if (credentials !== '') {
+  if (credentials !== null) {
     userLogged.loggedIn = true;
   }
   return userLogged && userLogged.loggedIn;
