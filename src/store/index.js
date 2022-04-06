@@ -3,7 +3,7 @@ import userReducer from "./reducers/user";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  token: tokenReducer,
+  credentials: tokenReducer,
   user:  userReducer
 });
 

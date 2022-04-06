@@ -2,7 +2,6 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const useAuth = () => {
   let credentials = localStorage.getItem('token')
-  console.log(credentials)
   const userLogged = { loggedIn: false };
   if (credentials !== null) {
     userLogged.loggedIn = true;
