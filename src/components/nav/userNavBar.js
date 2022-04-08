@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { useDispatch } from "react-redux";
 import { signOut } from "../../store/actions/index";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import WithdrawalModal from "../../components/cards/withdrawalModal";
@@ -54,7 +54,7 @@ const UserNavBar = () => {
             </Nav>
             <Nav>
               <Nav.Link onClick={() => getUserBalance()}> Balance: {balance}</Nav.Link>
-              {balance !== '###' ? <WithdrawalModal maxAmount={balance} /> : <Nav.Link onClick={() => getUserBalance()}>Unlock Withdrawl</Nav.Link>}
+              {balance !== '###' ? <WithdrawalModal maxAmount={balance} credentials={auth}/> : <Nav.Link onClick={() => getUserBalance()}>Unlock Withdrawl</Nav.Link>}
               <Nav.Link onClick={() => logOutAction()}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>

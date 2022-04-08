@@ -2,20 +2,36 @@ import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const WithdrawalModal = (props) => {
   const [wallet, setWallet] = useState("");
   const [amount, setAmount] = useState("");
-
+  const [validated, setValidated] = useState(false);
+  const transactionsParams = {amount: amount, destination_wallet: wallet}
+  const user = useSelector((state) => state.user);
+  
   const handleSubmit = (event) => {
-    console.log(wallet);
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
+    // event.preventDefault();
+    // const form = event.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    //   setValidated(true);
+    //   return;
+    // }
+    axios
+    .post(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/users/${user.id}/check_balance`, props.credentials, transactionsParams)
+    .then((res) => {
+      if (res.status === 200) {
+        return res
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      window.location.reload();
+    });
   };
   const [show, setShow] = useState(false);
 
@@ -30,8 +46,8 @@ const WithdrawalModal = (props) => {
           <Modal.Title>Max amount to withdraw: {props.maxAmount}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form onSubmit={handleSubmit} noValidate validated={validated}>
+            <Form.Group className="mb-3" controlId="wallet">
               <Form.Label>Wallet address to send your Bitcoin</Form.Label>
               <Form.Control
                 type="wallet"
@@ -41,7 +57,7 @@ const WithdrawalModal = (props) => {
                 autoFocus
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="btc">
               <Form.Label>Enter the amount you would like to send</Form.Label>
               <Form.Control
                 type="wallet"
