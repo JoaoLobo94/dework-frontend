@@ -29,6 +29,7 @@ const SignIn = () => {
           <p className="d-flex justify-content-center">Contact all issues: deworkbtc@gmail.com </p>
         </Row>
       </Container>
+      <div className="fade-in">
       <Container className="mt-3">
         <h2>How do i register my company</h2>
         <p>
@@ -56,11 +57,13 @@ const SignIn = () => {
           will join all these up and return a fare estimate for the employer and employee
         </p>
         <h2>What lies in the future</h2>
+        <p>First thing, i will make this project non custodial. At present time, its custodial, because its easier to develop. If people use this, it soon wont be.</p>
         <p>
           There are many improvements to be made. This is a simple version of my idea. Let me know if you like it by
           donating.
         </p>
       </Container>
+      </div>
     </div>
   );
 };

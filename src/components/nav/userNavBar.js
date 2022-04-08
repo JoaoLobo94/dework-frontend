@@ -51,6 +51,7 @@ const UserNavBar = () => {
             </Nav>
             <Nav>
               <Nav.Link onClick={() => getUserBalance()}> Balance: {balance}</Nav.Link>
+              <Nav.Link> Withdraw funds</Nav.Link>
               <Nav.Link onClick={() => logOutAction()}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>
