@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import "./withdrawModal.css";
 
 const WithdrawalModal = (props) => {
   const [wallet, setWallet] = useState("");
@@ -31,7 +30,7 @@ const WithdrawalModal = (props) => {
           setSend(true);
           setTxid(res.data.tx.hash);
         }
-      }, [])
+      })
       .catch(() => {
         setError(true);
       });
