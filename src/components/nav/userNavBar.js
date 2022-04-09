@@ -15,7 +15,7 @@ const UserNavBar = () => {
     localStorage.removeItem("token");
     window.location.reload();
   };
-  const [balance, setBalance] = useState('1');
+  const [balance, setBalance] = useState('###');
   const credentials = useSelector((state) => state.credentials);
   const user = useSelector((state) => state.user);
 
@@ -53,7 +53,7 @@ const UserNavBar = () => {
               <Nav.Link href="">Contributions</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link onClick={() => getUserBalance()}> Balance: {balance}</Nav.Link>
+              <Nav.Link onClick={() => getUserBalance()}> Balance: {balance} BTC</Nav.Link>
               {balance !== '###' ? <WithdrawalModal maxAmount={balance} credentials={auth}/> : <Nav.Link onClick={() => getUserBalance()}>Unlock Withdrawl</Nav.Link>}
               <Nav.Link onClick={() => logOutAction()}>Logout</Nav.Link>
             </Nav>
