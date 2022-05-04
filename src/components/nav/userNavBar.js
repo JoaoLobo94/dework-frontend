@@ -49,11 +49,11 @@ const UserNavBar = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="">Companies</Nav.Link>
-              <Nav.Link href="">Contributions</Nav.Link>
+              <Nav.Link href="/companies">Companies</Nav.Link>
+              <Nav.Link href="/contributions"> Your contributions</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link onClick={() => getUserBalance()}> Balance: {balance} BTC</Nav.Link>
+              <Nav.Link onClick={() => getUserBalance()}> Your Balance: {balance} BTC</Nav.Link>
               {balance !== '###' ? <WithdrawalModal maxAmount={balance} credentials={auth}/> : <Nav.Link onClick={() => getUserBalance()}>Unlock Withdrawl</Nav.Link>}
               <Nav.Link onClick={() => logOutAction()}>Logout</Nav.Link>
             </Nav>

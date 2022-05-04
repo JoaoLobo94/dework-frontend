@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "./pages/signInPage/signIn";
 import Companies from "./pages/companiesPage/companies";
 import ProtectedRoutes from "./pages/protectedPage/protectedRoute";
+import Contributions from "./pages/contributionsPage/contribributions";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<SignIn />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/companies" element={<Companies />} />
+            <Route path="/contributions" element={<Contributions />} />
           </Route>
         </Routes>
       </div>
