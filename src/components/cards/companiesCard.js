@@ -3,12 +3,17 @@ import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"
+import { setCompany } from "../../store/actions/index";
+import { useDispatch } from "react-redux";
 
 const CompaniesCard = (props) => {
   const [allCompanies, setAllCompanies] = useState([]);
   const [allUserCompanies, setAllUserCompanies] = useState([]);
   const credentials = useSelector((state) => state.credentials);
   const user = useSelector((state) => state.user);
+  const history = useNavigate();
+  const dispatch = useDispatch();
 
   const auth = {
     headers: {
@@ -17,7 +22,10 @@ const CompaniesCard = (props) => {
       uid: user.uid,
     },
   };
-
+  const setAndNavigateTo = (company) => {
+    dispatch(setCompany(company))
+    history("/companies/" + company["id"])
+    }
   useEffect(() => {
     const allCompanies = async () => {
       await axios
@@ -46,13 +54,13 @@ const CompaniesCard = (props) => {
         <ListGroup variant="flush">
           {props.type === "All companies" ? (
             allCompanies.map((company) => (
-              <ListGroup.Item action href={"/companies/" + company["id"]}>
+              <ListGroup.Item action onClick={() => setAndNavigateTo(company)}>
                 {company["name"]}
               </ListGroup.Item>
             ))
           ) : allUserCompanies ? (
             allCompanies.map((company) => (
-              <ListGroup.Item action href={"/companies/" + company["id"]}>
+              <ListGroup.Item action onClick={() => setAndNavigateTo(company)}>
                 {company["name"]}
               </ListGroup.Item>
             ))

@@ -17,3 +17,10 @@ export const signOut = () => {
     type: "SIGN_OUT",
   };
 };
+
+export const setCompany = (company) => {
+  return {
+    type: "SET_COMPANY",
+    payload: company,
+  };
+};
