@@ -8,18 +8,13 @@ import CompanyNavType from "./companyNavType";
 
 
 
-const UserNavBar = (props) => {
+const NavBar = (props) => {
   const dispatch = useDispatch();
   const logOutAction = () => {
     dispatch(signOut());
     localStorage.removeItem("token");
     window.location.reload();
   };
-
-
-    // {props.type == 'user' ?  : <Nav.Link onClick={() => getUserBalance()}> Your company's Balance: {balance} BTC</Nav.Link> }
-    // }
-
 
   return (
     <div>
@@ -30,7 +25,7 @@ const UserNavBar = (props) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/companies">Companies</Nav.Link>
-              <Nav.Link href="/contributions"> Your contributions</Nav.Link>
+              {/* <Nav.Link href="/contributions"> Your contributions</Nav.Link> */}
             </Nav>
             <Nav>
                {props.type == 'user' ? <UserNavType /> : <CompanyNavType />}
@@ -43,4 +38,4 @@ const UserNavBar = (props) => {
   );
 };
 
-export default UserNavBar;
+export default NavBar;

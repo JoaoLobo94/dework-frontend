@@ -15,7 +15,7 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path="/companies" element={<Companies />} />
             <Route path="/companies/*" element={<SingleCompanyPage />} />
-            <Route path="/contributions" element={<Contributions />} />
+            {/* <Route path="/contributions" element={<Contributions />} /> */}
           </Route>
         </Routes>
       </div>

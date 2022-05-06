@@ -1,9 +1,9 @@
-import UserNavBar from '../../components/nav/userNavBar';
+import NavBar from '../../components/nav/navBar';
 import './singleCompaniesPage.css'
 
 
 const SingleCompanyPage = () => {
-  return <div><UserNavBar type={'company'}/></div>;
+  return <div><NavBar type={'company'}/></div>;
 };
 
 export default SingleCompanyPage;
