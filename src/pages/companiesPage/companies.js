@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 const Companies = () => {
   return (
     <div>
-      <UserNavBar />
+      <UserNavBar type={'user'} />
       <Container>
       <h1>Create a company</h1>
       <Row className="mt-4 mb-4">

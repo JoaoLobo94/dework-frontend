@@ -78,7 +78,8 @@ const WithdrawalModal = (props) => {
         {send ? <Modal.Body>Transaction is getting propagated with id: {txid}</Modal.Body> : ""}
         {error ? (
           <Modal.Body>
-            There has been an error. Please try again maybe with a lower amount. Do not forget transaction fees
+            There has been an error. Please try again maybe with a lower amount. Do not forget transaction fees.
+            Check if your wallet is valid
           </Modal.Body>
         ) : (
           ""

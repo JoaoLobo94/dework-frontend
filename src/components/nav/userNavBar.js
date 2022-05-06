@@ -3,42 +3,22 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { useDispatch } from "react-redux";
 import { signOut } from "../../store/actions/index";
-import { useState} from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import WithdrawalModal from "../../components/cards/withdrawalModal";
+import UserNavType from "./userNavType";
+import CompanyNavType from "./companyNavType";
 
-const UserNavBar = () => {
+
+
+const UserNavBar = (props) => {
   const dispatch = useDispatch();
   const logOutAction = () => {
     dispatch(signOut());
     localStorage.removeItem("token");
     window.location.reload();
   };
-  const [balance, setBalance] = useState('###');
-  const credentials = useSelector((state) => state.credentials);
-  const user = useSelector((state) => state.user);
 
-  const auth = {
-    headers : {
-      "access-token": credentials.token,
-      'client': credentials.client,
-      'uid': user.uid
-    }
-  }
 
-  const getUserBalance = () => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/users/${user.id}/check_balance`, auth)
-      .then((res) => {
-        if (res.status === 200) {
-          setBalance(res.data.balance);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    // {props.type == 'user' ?  : <Nav.Link onClick={() => getUserBalance()}> Your company's Balance: {balance} BTC</Nav.Link> }
+    // }
 
 
   return (
@@ -53,8 +33,7 @@ const UserNavBar = () => {
               <Nav.Link href="/contributions"> Your contributions</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link onClick={() => getUserBalance()}> Your Balance: {balance} BTC</Nav.Link>
-              {balance !== '###' ? <WithdrawalModal maxAmount={balance} credentials={auth}/> : <Nav.Link onClick={() => getUserBalance()}>Unlock Withdrawl</Nav.Link>}
+               {props.type == 'user' ? <UserNavType /> : <CompanyNavType />}
               <Nav.Link onClick={() => logOutAction()}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>
