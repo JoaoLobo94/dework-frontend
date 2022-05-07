@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "./pages/signInPage/signIn";
 import Companies from "./pages/companiesPage/companies";
 import ProtectedRoutes from "./pages/protectedPage/protectedRoute";
-import Contributions from "./pages/contributionsPage/contribributions";
+// import Contributions from "./pages/contributionsPage/contribributions";
 import SingleCompanyPage from "./pages/singleCompaniesPage/singleCompaniesPage";
 
 function App() {
