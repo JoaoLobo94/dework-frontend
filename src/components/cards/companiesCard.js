@@ -3,13 +3,14 @@ import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { setCompany } from "../../store/actions/index";
 import { useDispatch } from "react-redux";
 
 const CompaniesCard = (props) => {
   const [allCompanies, setAllCompanies] = useState([]);
   const [allUserCompanies, setAllUserCompanies] = useState([]);
+  const [failed, setFailed] = useState(false);
   const credentials = useSelector((state) => state.credentials);
   const user = useSelector((state) => state.user);
   const history = useNavigate();
@@ -23,30 +24,27 @@ const CompaniesCard = (props) => {
     },
   };
   const setAndNavigateTo = (company) => {
-    dispatch(setCompany(company))
-    history("/companies/" + company["id"])
-    }
+    dispatch(setCompany(company));
+    history("/companies/" + company["id"]);
+  };
   useEffect(() => {
     const allCompanies = async () => {
-      await axios
-        .get(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/companies`)
-        .then((response) => setAllCompanies(response.data));
+      axios
+        .all([
+          axios.get(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/companies`),
+          axios.get(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/user_companies`, auth),
+        ])
+        .then(
+          axios.spread((companies, user_companies) => {
+            setAllCompanies(companies.data);
+            setAllUserCompanies(user_companies.data);
+          })
+        ).catch(() => {
+          setFailed(true)
+        });
     };
     allCompanies();
-  }, []);
-  useEffect(() => {
-    const allUserCompanies = async () => {
-      if (auth.headers.client) {
-        await axios
-          .get(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/user_companies`, auth)
-          .then((response) => setAllUserCompanies(response.data))
-          .catch((err) => {
-            setAllUserCompanies(null);
-          });
-      }
-    };
-    allUserCompanies();
-  }, []);
+  }, [failed]);
   return (
     <div>
       <Card style={{ width: "18rem" }}>
@@ -54,18 +52,17 @@ const CompaniesCard = (props) => {
         <ListGroup variant="flush">
           {props.type === "All companies" ? (
             allCompanies.map((company) => (
-              <ListGroup.Item action onClick={() => setAndNavigateTo(company)}>
+              <ListGroup.Item action key={company.id} onClick={() => setAndNavigateTo(company)}>
                 {company["name"]}
               </ListGroup.Item>
             ))
           ) : allUserCompanies ? (
-            allCompanies.map((company) => (
-              <ListGroup.Item action onClick={() => setAndNavigateTo(company)}>
+            allUserCompanies.map((company) => (
+              <ListGroup.Item action key={company.id} onClick={() => setAndNavigateTo(company)}>
                 {company["name"]}
               </ListGroup.Item>
             ))
-          )
-           : (
+          ) : (
             <ListGroup.Item>Nothing yet</ListGroup.Item>
           )}
         </ListGroup>

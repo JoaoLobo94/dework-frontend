@@ -47,12 +47,12 @@ const CreateCompaniesCard = () => {
         />
       </Form.Group>
       <Form.Group className="mb-3">
-        <Form.Label>Github link</Form.Label>
+        <Form.Label>Full Github link</Form.Label>
         <Form.Control
           onChange={(e) => setGithub(e.target.value)}
           value={github}
           required
-          placeholder="Enter your company github repository link"
+          placeholder="Enter your company github repository link. You must paste all the entire link like this: https://github.com/bitcoin/bitcoin"
         />
       </Form.Group>
       <Form.Group className="mb-3">

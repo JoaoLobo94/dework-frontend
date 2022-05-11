@@ -53,7 +53,7 @@ const SingleCompanyPage = () => {
             <td>{company.id}</td>
             <td>{company.name}</td>
             <td>{company.pub_key}</td>
-            <td>{company.github}</td>
+            <td><a href={company.github}>Show</a></td>
             <td>{owner.email}</td>
           </tr>
         </tbody>
@@ -64,7 +64,6 @@ const SingleCompanyPage = () => {
           {company.description}
         </Card.Body>
       </Card>
-      {/* description */}
       {/* contributions table */}
     </div>
   );
