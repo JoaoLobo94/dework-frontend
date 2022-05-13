@@ -1,17 +1,21 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import NavBar from "../../components/nav/navBar";
 import Table from "react-bootstrap/Table";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./singleCompaniesPage.css";
-import CompanyContributionsTable from "../../components/table/companyContibutionsTable";
+import CompanyContributionsTable from "../../components/table/companyContributionsTable";
+import Container from "react-bootstrap/Container";
+import CreateContributionCard from "../../components/cards/createContributionCard";
 
-const SingleCompanyPage = () => {
+
+const SingleCompanyPage = (props) => {
   const [owner, setOwner] = useState({});
   const credentials = useSelector((state) => state.credentials);
   const user = useSelector((state) => state.user);
   const company = useSelector((state) => state.company);
+  const [refresh, setRefresh] = useState(false)
 
   const auth = {
     headers: {
@@ -22,23 +26,20 @@ const SingleCompanyPage = () => {
   };
   useEffect(() => {
     const ownerInfo = async () => {
-      if (auth.headers.client) {
+      if (company.owner){
         await axios
           .get(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/users/${company.owner}`, auth)
-          .then((response) =>setOwner(response.data) )
+          .then((response) => setOwner(response.data))
           .catch((err) => {
             setOwner({});
+            setRefresh(true)
           });
-      }
-    };
+    }};
     ownerInfo();
-  }, []);
+  }, [refresh]);
   return (
     <div>
       <NavBar type={"company"} />
-      <Container></Container>
-      <Row></Row>
-      <Col></Col>
       <Table striped bordered responsive="xl">
         <thead>
           <tr>
@@ -54,19 +55,22 @@ const SingleCompanyPage = () => {
             <td>{company.id}</td>
             <td>{company.name}</td>
             <td>{company.pub_key}</td>
-            <td><a href={company.github}>Show</a></td>
+            <td>
+              <a href={company.github}>Show</a>
+            </td>
             <td>{owner.email}</td>
           </tr>
         </tbody>
       </Table>
       <Card className="justify-content-center">
         <Card.Header>Description</Card.Header>
-        <Card.Body>
-          {company.description}
-        </Card.Body>
+        <Card.Body>{company.description}</Card.Body>
       </Card>
       <CompanyContributionsTable />
-      {/* create contribution */}
+      <Container>
+      <h2 className="mt-3">Create a new contribution</h2>
+        <CreateContributionCard />
+      </Container>
     </div>
   );
 };

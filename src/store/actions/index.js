@@ -24,3 +24,10 @@ export const setCompany = (company) => {
     payload: company,
   };
 };
+
+export const setContribution = (contribution) => {
+  return {
+    type: "SET_CONTRIBUTION",
+    payload: contribution,
+  };
+};

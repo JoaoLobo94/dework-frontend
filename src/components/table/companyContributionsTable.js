@@ -4,6 +4,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setContribution } from "../../store/actions/index";
 
 const CompanyContributionsTable = () => {
   const [contributions, setContributions] = useState([]);
@@ -12,6 +14,7 @@ const CompanyContributionsTable = () => {
   const user = useSelector((state) => state.user);
   const company = useSelector((state) => state.company);
   const history = useNavigate();
+  const dispatch = useDispatch();
 
   const auth = {
     headers: {
@@ -22,7 +25,7 @@ const CompanyContributionsTable = () => {
   };
   useEffect(() => {
     const contributions = async () => {
-      if (auth.headers.client) {
+      if (auth.headers.client && company.id) {
         await axios
           .get(
             `${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/companies/${company.id}/contributions`,
@@ -30,16 +33,17 @@ const CompanyContributionsTable = () => {
           )
           .then((response) => setContributions(response.data))
           .catch(() => {
-            setFailed(true)
+            setFailed(true);
           });
       }
     };
     contributions();
   }, [failed]);
 
-  const viewContribution = (id) => {
-	   history("/contributions/" + id)
-  }
+  const viewContribution = (contribution) => {
+    dispatch(setContribution(contribution))
+    history("/contributions/" + contribution.id);
+  };
   return (
     <div>
       <h2 className="mt-3">Contributions</h2>
@@ -59,12 +63,14 @@ const CompanyContributionsTable = () => {
           {contributions.map((contribution) => (
             <tr>
               <td>{contribution.title}</td>
-	      <td>{contribution.pull_request}</td>
-	      <td>{contribution.merged}</td>
-	      <td>{contribution.accepted_for_start}</td>
-	      <td>{contribution.creator}</td>
-	      <td>{contribution.current_value} BTC</td>
-	      <td><Nav.Link onClick={() => viewContribution(contribution.id)}>View</Nav.Link></td>
+              <td>{contribution.pull_request}</td>
+              <td>{contribution.merged}</td>
+              <td>{contribution.accepted_for_start}</td>
+              <td>{contribution.creator}</td>
+              <td>{contribution.current_value} BTC</td>
+              <td>
+                <Nav.Link onClick={() => viewContribution(contribution)}>View</Nav.Link>
+              </td>
             </tr>
           ))}
         </tbody>
