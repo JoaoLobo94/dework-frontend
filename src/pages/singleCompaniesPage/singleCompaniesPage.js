@@ -10,7 +10,7 @@ import Container from "react-bootstrap/Container";
 import CreateContributionCard from "../../components/cards/createContributionCard";
 
 
-const SingleCompanyPage = (props) => {
+const SingleCompanyPage = () => {
   const [owner, setOwner] = useState({});
   const credentials = useSelector((state) => state.credentials);
   const user = useSelector((state) => state.user);
