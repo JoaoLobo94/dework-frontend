@@ -5,6 +5,7 @@ import Companies from "./pages/companiesPage/companies";
 import ProtectedRoutes from "./pages/protectedPage/protectedRoute";
 // import Contributions from "./pages/contributionsPage/contribributions";
 import SingleCompanyPage from "./pages/singleCompaniesPage/singleCompaniesPage";
+import SingleContribution from "./pages/singleContributionPage/singleContribution";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/companies" element={<Companies />} />
             <Route path="/companies/*" element={<SingleCompanyPage />} />
             {/* <Route path="/contributions" element={<Contributions />} /> */}
+            <Route path="/contributions/*" element={<SingleContribution />} />
           </Route>
         </Routes>
       </div>

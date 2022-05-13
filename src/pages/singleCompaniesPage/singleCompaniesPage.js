@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./singleCompaniesPage.css";
+import CompanyContributionsTable from "../../components/table/companyContibutionsTable";
 
 const SingleCompanyPage = () => {
   const [owner, setOwner] = useState({});
   const credentials = useSelector((state) => state.credentials);
   const user = useSelector((state) => state.user);
+  const company = useSelector((state) => state.company);
 
   const auth = {
     headers: {
@@ -31,7 +33,6 @@ const SingleCompanyPage = () => {
     };
     ownerInfo();
   }, []);
-  const company = useSelector((state) => state.company);
   return (
     <div>
       <NavBar type={"company"} />
@@ -64,7 +65,8 @@ const SingleCompanyPage = () => {
           {company.description}
         </Card.Body>
       </Card>
-      {/* contributions table */}
+      <CompanyContributionsTable />
+      {/* create contribution */}
     </div>
   );
 };
