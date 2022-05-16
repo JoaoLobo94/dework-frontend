@@ -25,7 +25,6 @@ const CompanyFundModal = () => {
             <QRCode value={company.pub_key} />
             </Col>
           </Row>
-          <Row className="d-flex justify-content-md-center mt-3">{company.pub_key}</Row>
         </Modal.Body>
       </Modal>
     </div>

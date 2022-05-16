@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { signOut } from "../../store/actions/index";
 import UserNavType from "./userNavType";
 import CompanyNavType from "./companyNavType";
+import ContributionNavType from "./contributionNavType";
 
 
 
@@ -28,7 +29,7 @@ const NavBar = (props) => {
               {/* <Nav.Link href="/contributions"> Your contributions</Nav.Link> */}
             </Nav>
             <Nav>
-               {props.type == 'user' ? <UserNavType /> : <CompanyNavType />}
+               {props.type === 'user' ? <UserNavType /> : props.type ==='contribution' ? <ContributionNavType /> : <CompanyNavType />}
               <Nav.Link onClick={() => logOutAction()}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>

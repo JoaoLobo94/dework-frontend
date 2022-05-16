@@ -1,6 +1,11 @@
+import NavBar from "../../components/nav/navBar";
 
 const SingleContribution = () => {
-	return ( <div><h1>hello</h1></div> );
-}
+  return (
+    <div>
+      <NavBar type={"contribution"} />
+    </div>
+  );
+};
 
 export default SingleContribution;

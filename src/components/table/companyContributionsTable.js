@@ -25,17 +25,16 @@ const CompanyContributionsTable = () => {
   };
   useEffect(() => {
     const contributions = async () => {
-      if (auth.headers.client && company.id) {
         await axios
           .get(
             `${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/companies/${company.id}/contributions`,
             auth
           )
-          .then((response) => setContributions(response.data))
+          .then((response) => {
+            setContributions(response.data)})
           .catch(() => {
             setFailed(true);
           });
-      }
     };
     contributions();
   }, [failed]);
