@@ -9,13 +9,12 @@ import CompanyContributionsTable from "../../components/table/companyContributio
 import Container from "react-bootstrap/Container";
 import CreateContributionCard from "../../components/cards/createContributionCard";
 
-
 const SingleCompanyPage = () => {
   const [owner, setOwner] = useState({});
   const credentials = useSelector((state) => state.credentials);
   const user = useSelector((state) => state.user);
   const company = useSelector((state) => state.company);
-  const [refresh, setRefresh] = useState(false)
+  const [refresh, setRefresh] = useState(false);
 
   const auth = {
     headers: {
@@ -26,15 +25,14 @@ const SingleCompanyPage = () => {
   };
   useEffect(() => {
     const ownerInfo = async () => {
-      if (company.owner){
-        await axios
-          .get(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/users/${company.owner}`, auth)
-          .then((response) => setOwner(response.data))
-          .catch((err) => {
-            setOwner({});
-            setRefresh(true)
-          });
-    }};
+      await axios
+        .get(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/users/${company.owner}`, auth)
+        .then((response) => setOwner(response.data))
+        .catch(() => {
+          setOwner({});
+          setRefresh(true);
+        });
+    };
     ownerInfo();
   }, [refresh]);
   return (
@@ -48,6 +46,7 @@ const SingleCompanyPage = () => {
             <th>Public key</th>
             <th>Github page</th>
             <th>Owner's email</th>
+            <th>Owner's telegram</th>
           </tr>
         </thead>
         <tbody>
@@ -59,18 +58,19 @@ const SingleCompanyPage = () => {
               <a href={company.github}>Show</a>
             </td>
             <td>{owner.email}</td>
+            <td>{owner.telegram}</td>
           </tr>
         </tbody>
       </Table>
-      <Card className="justify-content-center">
+      <Card className="justify-content-center mb-3 mt-3">
         <Card.Header>Description</Card.Header>
         <Card.Body>{company.description}</Card.Body>
       </Card>
-      <CompanyContributionsTable />
       <Container>
-      <h2 className="mt-3">Create a new contribution</h2>
+        <h2 className="mt-3">Create a new contribution</h2>
         <CreateContributionCard />
       </Container>
+      <CompanyContributionsTable />
     </div>
   );
 };

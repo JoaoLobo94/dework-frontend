@@ -11,6 +11,7 @@ import { setToken, setUser } from "../../store/actions/index";
 const SignInCard = () => {
   const [tab, setTab] = useState("signIn");
   const [email, setEmail] = useState("");
+  const [telegram, setTelegram] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [job, setJob] = useState("");
@@ -24,6 +25,7 @@ const SignInCard = () => {
     job: job,
     password_confirmation: passwordConfirmation,
     email: email,
+    telegram: telegram,
   };
   const dispatch = useDispatch();
   let credentials = {token: '', client: ''}
@@ -192,7 +194,17 @@ const SignInCard = () => {
                 />
                 <Form.Control.Feedback type="invalid">Please insert your email address</Form.Control.Feedback>
               </Form.Group>
-            </Card.Text>
+             <Card.Text>
+              <Form.Group className="mb-3">
+                <Form.Label>Telegram Number</Form.Label>
+                <Form.Control
+                  onChange={(e) => setTelegram(e.target.value)}
+                  value={telegram}
+                  type="telegram"
+                  placeholder="Enter your contact number"
+                />
+              </Form.Group>
+            </Card.Text></Card.Text>
             <Card.Text>
               <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>

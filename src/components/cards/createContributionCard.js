@@ -9,6 +9,7 @@ import { setContribution } from "../../store/actions/index";
 const CreateContributionCard = () => {
   const [title, setTitle] = useState("");
   const [pullRequest, setPullRequest] = useState("");
+  const [description, setDescription] = useState("");
   const credentials = useSelector((state) => state.credentials);
   const user = useSelector((state) => state.user);
   const company = useSelector((state) => state.company);
@@ -20,13 +21,17 @@ const CreateContributionCard = () => {
       uid: user.uid,
     },
   };
-  const contributionParams = { title: title, pull_request: pullRequest };
+  const contributionParams = { title: title, pull_request: pullRequest, description: description };
   const history = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
     axios
-      .post(`${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/companies/${company.id}/contributions`, contributionParams, auth)
+      .post(
+        `${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/companies/${company.id}/contributions`,
+        contributionParams,
+        auth
+      )
       .then((res) => {
         if (res.status === 200) {
           dispatch(setContribution(res.data));
@@ -53,6 +58,17 @@ const CreateContributionCard = () => {
           value={pullRequest}
           required
           placeholder="Paste your full pull request link"
+        />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          required
+          placeholder="Describe your contribution here"
         />
       </Form.Group>
       <Button variant="primary" type="submit">

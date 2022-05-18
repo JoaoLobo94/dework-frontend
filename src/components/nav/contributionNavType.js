@@ -8,7 +8,7 @@ const ContributionNavType = () => {
     <div>
       <Row>
         <Col md="auto">
-          <Nav.Link> This contribution value: {balance} BTC</Nav.Link>
+          <Nav.Link> This contribution value: {balance ? balance : 0} BTC</Nav.Link>
         </Col>
         <Col>
           <ContributionVoteModal />

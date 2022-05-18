@@ -38,7 +38,7 @@ const CompanyNavType = () => {
     <div>
       <Row>
         <Col md="auto">
-          <Nav.Link onClick={() => getCompanyBalance()}> Your company Balance: {balance} BTC</Nav.Link>
+          <Nav.Link onClick={() => getCompanyBalance()}> Company Balance: {balance ? balance : 0} BTC</Nav.Link>
         </Col>
         <Col>
           {balance !== "###" ? (

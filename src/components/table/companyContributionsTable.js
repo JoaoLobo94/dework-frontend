@@ -43,6 +43,7 @@ const CompanyContributionsTable = () => {
     dispatch(setContribution(contribution))
     history("/contributions/" + contribution.id);
   };
+  if (contributions.length > 0) {
   return (
     <div>
       <h2 className="mt-3">Contributions</h2>
@@ -53,7 +54,6 @@ const CompanyContributionsTable = () => {
             <th>Pull request</th>
             <th>Merged</th>
             <th>Work started</th>
-            <th>Contribution creator</th>
             <th>Value for distribution</th>
             <th></th>
           </tr>
@@ -63,10 +63,9 @@ const CompanyContributionsTable = () => {
             <tr>
               <td>{contribution.title}</td>
               <td>{contribution.pull_request}</td>
-              <td>{contribution.merged}</td>
-              <td>{contribution.accepted_for_start}</td>
-              <td>{contribution.creator}</td>
-              <td>{contribution.current_value} BTC</td>
+              <td>{contribution.merged ? 'Yes' : 'No'}</td>
+              <td>{contribution.accepted_for_start ? 'Yes' : 'No'}</td>
+              <td>{contribution.current_value ?  contribution.current_value : 0 } BTC</td>
               <td>
                 <Nav.Link onClick={() => viewContribution(contribution)}>View</Nav.Link>
               </td>
@@ -75,7 +74,11 @@ const CompanyContributionsTable = () => {
         </tbody>
       </Table>
     </div>
-  );
+  );} else{
+    return(
+      <div></div>
+    )
+  }
 };
 
 export default CompanyContributionsTable;
