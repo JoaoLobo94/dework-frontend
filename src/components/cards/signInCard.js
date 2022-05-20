@@ -13,6 +13,7 @@ const SignInCard = () => {
   const [email, setEmail] = useState("");
   const [telegram, setTelegram] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [job, setJob] = useState("");
   const [name, setName] = useState("");
@@ -30,8 +31,10 @@ const SignInCard = () => {
   const dispatch = useDispatch();
   let credentials = {token: '', client: ''}
   let user = {}
-
-
+  const changeTab = () => {
+    setTab('signUp')
+    setError(false)
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -57,7 +60,7 @@ const SignInCard = () => {
         })
         .catch((err) => {
           console.log(err);
-          window.location.reload();
+          setError(true)
         });
     } else {
       axios
@@ -75,7 +78,7 @@ const SignInCard = () => {
         })
         .catch((err) => {
           console.log(err);
-          window.location.reload();
+          setError(true)
         });
     }
   };
@@ -107,7 +110,7 @@ const SignInCard = () => {
                 <Nav.Link onClick={() => setTab("signIn")}>SignIn</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link onClick={() => setTab("signUp")}>SignUp</Nav.Link>
+                <Nav.Link onClick={() => changeTab()}>SignUp</Nav.Link>
               </Nav.Item>
             </Nav>
           </Card.Header>
@@ -139,7 +142,7 @@ const SignInCard = () => {
               </Form.Group>
             </Card.Text>
           </Card.Body>
-          <Button type="submit">Submit form</Button>
+          <Button type="submit">{error ? "There was an error executing the request, check your input and click here to try again." : "Submit Form"}</Button>
         </Card>
       </Form>
     );
@@ -233,7 +236,7 @@ const SignInCard = () => {
             </Card.Text>
           </Card.Body>
           <Button disabled={disableButton()} type="submit">
-            {checkMatchingPasswords()}
+             {error ? "There was an error executing the request, check your input and click here to try again." : checkMatchingPasswords()}
           </Button>
         </Card>
       </Form>

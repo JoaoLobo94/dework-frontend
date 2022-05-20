@@ -50,9 +50,6 @@ const WithdrawalModal = (props) => {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="wallet">
-              <Form.Label>
-                At the moment you will only be able to withdraw 50% of your funds on each transaction
-              </Form.Label>
               <Form.Label>Wallet address to send your Bitcoin</Form.Label>
               <Form.Control
                 type="wallet"
@@ -66,7 +63,7 @@ const WithdrawalModal = (props) => {
               <Form.Label>Enter the amount you would like to send</Form.Label>
               <Form.Control
                 type="wallet"
-                placeholder="Enter how much you would like to withdraw"
+                placeholder="Enter how much you would like to withdraw. Do not forget to account for transaction fees"
                 onChange={(e) => setAmount(e.target.value)}
                 value={amount}
                 autoFocus

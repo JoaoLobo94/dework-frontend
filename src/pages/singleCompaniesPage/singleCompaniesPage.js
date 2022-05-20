@@ -38,39 +38,44 @@ const SingleCompanyPage = () => {
   return (
     <div>
       <NavBar type={"company"} />
-      <Table striped bordered responsive="xl">
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>Name</th>
-            <th>Public key</th>
-            <th>Github page</th>
-            <th>Owner's email</th>
-            <th>Owner's telegram</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{company.id}</td>
-            <td>{company.name}</td>
-            <td>{company.pub_key}</td>
-            <td>
-              <a href={company.github}>Show</a>
-            </td>
-            <td>{owner.email}</td>
-            <td>{owner.telegram}</td>
-          </tr>
-        </tbody>
-      </Table>
-      <Card className="justify-content-center mb-3 mt-3">
-        <Card.Header>Description</Card.Header>
-        <Card.Body>{company.description}</Card.Body>
-      </Card>
       <Container>
-        <h2 className="mt-3">Create a new contribution</h2>
-        <CreateContributionCard />
+        <Table striped bordered responsive="xl" className="mt-3">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Name</th>
+              <th>Public key</th>
+              <th>Github page</th>
+              <th>Owner's email</th>
+              <th>Owner's telegram</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{company.id}</td>
+              <td>{company.name}</td>
+              <td>{company.pub_key}</td>
+              <td>
+                <a href={company.github}>Show</a>
+              </td>
+              <td>{owner.email}</td>
+              <td>{owner.telegram}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <Card className="justify-content-center mb-3 mt-3">
+          <Card.Header>Tip: Contact company owner via telegram or email to discuss issues</Card.Header>
+        </Card>
+        <Card className="justify-content-center mb-3 mt-3">
+          <Card.Header>Description</Card.Header>
+          <Card.Body>{company.description}</Card.Body>
+        </Card>
+        <Container>
+          <h2 className="mt-3">Create a new contribution</h2>
+          <CreateContributionCard />
+        </Container>
+        <CompanyContributionsTable />
       </Container>
-      <CompanyContributionsTable />
     </div>
   );
 };
