@@ -143,7 +143,11 @@ const SingleContribution = () => {
         <Card className="justify-content-center mb-3 mt-3">
           <Card.Header>Tip: Contact users via telegram or email to discuss contribution</Card.Header>
         </Card>
-        <h2 className="mt-3">Users participating</h2>
+        <Card className="justify-content-center mb-3 mt-3">
+          <Card.Header>
+            <h2 className="mt-3">Users participating</h2>
+          </Card.Header>
+        </Card>
         <Table striped bordered responsive="xl">
           <thead>
             <tr>
@@ -168,42 +172,50 @@ const SingleContribution = () => {
           <Card.Header>Description</Card.Header>
           <Card.Body>{contribution.description}</Card.Body>
         </Card>
-        <Row>
-          <Col>
-            {contribution.accepted_for_start || (user.id === company.owner) === false ? (
-              <Button className="disabled">Work Already started or you don't have permission</Button>
-            ) : (
-              <Button onClick={() => acceptForWork()}>Accept work start</Button>
-            )}
-          </Col>
-          <Col>
-            {contribution.accepted_for_start && user.id === contribution.creator ? (
-              <Button onClick={handleShow}>Add user to contribution</Button>
-            ) : (
-              <Button className="disabled">You cannot add user to contribution</Button>
-            )}
-          </Col>
-          <Col>
-            {user.id === company.owner && !contribution.merged ? (
-              <Button onClick={() => finishAndPay()}>Finish and pay contributors</Button>
-            ) : (
-              <Button className="disabled">You do not have permission to finish work or it has been payed</Button>
-            )}
-          </Col>
-        </Row>
-        <Modal size="lg" show={show} onHide={handleClose}>
-          <Modal.Header closeButton></Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3" controlId="btc">
-                <Form.Label>Enter the email of the user you would like to add</Form.Label>
-                <Form.Control type="email" onChange={(e) => setUserEmail(e.target.value)} value={userEmail} autoFocus />
-              </Form.Group>
-              <Button type="submit">Add user</Button>
-            </Form>
-            <Modal.Body>{error}</Modal.Body>
-          </Modal.Body>
-        </Modal>
+        <Card className="justify-content-center mb-3 mt-3">
+          <Card.Header>Actions</Card.Header>{" "}
+        </Card>
+          <Row>
+            <Col md="auto">
+              {contribution.accepted_for_start || (user.id === company.owner) === false ? (
+                <Button className="disabled">Work Already started or you don't have permission</Button>
+              ) : (
+                <Button onClick={() => acceptForWork()}>Accept work start</Button>
+              )}
+            </Col>
+            <Col md="auto">
+              {contribution.accepted_for_start && user.id === contribution.creator ? (
+                <Button onClick={handleShow}>Add user to contribution</Button>
+              ) : (
+                <Button className="disabled">You cannot add user to contribution</Button>
+              )}
+            </Col>
+            <Col md="auto">
+              {user.id === company.owner && !contribution.merged ? (
+                <Button onClick={() => finishAndPay()}>Finish and pay contributors</Button>
+              ) : (
+                <Button className="disabled">You do not have permission to finish work or it has been payed</Button>
+              )}
+            </Col>
+          </Row>
+          <Modal size="lg" show={show} onHide={handleClose}>
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="btc">
+                  <Form.Label>Enter the email of the user you would like to add</Form.Label>
+                  <Form.Control
+                    type="email"
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    value={userEmail}
+                    autoFocus
+                  />
+                </Form.Group>
+                <Button type="submit">Add user</Button>
+              </Form>
+              <Modal.Body>{error}</Modal.Body>
+            </Modal.Body>
+          </Modal>
       </Container>
     </div>
   );

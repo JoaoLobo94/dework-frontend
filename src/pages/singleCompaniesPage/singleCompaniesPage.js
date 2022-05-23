@@ -39,6 +39,11 @@ const SingleCompanyPage = () => {
     <div>
       <NavBar type={"company"} />
       <Container>
+        <Card className="justify-content-center mb-3 mt-3">
+          <Card.Header>
+            <h1>{company.name}</h1>
+          </Card.Header>
+        </Card>
         <Table striped bordered responsive="xl" className="mt-3">
           <thead>
             <tr>
@@ -70,10 +75,14 @@ const SingleCompanyPage = () => {
           <Card.Header>Description</Card.Header>
           <Card.Body>{company.description}</Card.Body>
         </Card>
-        <Container>
-          <h2 className="mt-3">Create a new contribution</h2>
-          <CreateContributionCard />
-        </Container>
+        <Card className="justify-content-center mb-3 mt-3">
+          <Card.Header>
+            <h2 className="mt-3">Create a new contribution</h2>
+          </Card.Header>
+          <Card.Body>
+            <CreateContributionCard />
+          </Card.Body>
+        </Card>
         <CompanyContributionsTable />
       </Container>
     </div>

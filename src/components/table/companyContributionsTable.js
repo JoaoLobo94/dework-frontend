@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setContribution } from "../../store/actions/index";
+import { Card } from "react-bootstrap";
 
 const CompanyContributionsTable = () => {
   const [contributions, setContributions] = useState([]);
@@ -25,59 +26,63 @@ const CompanyContributionsTable = () => {
   };
   useEffect(() => {
     const contributions = async () => {
-        await axios
-          .get(
-            `${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/companies/${company.id}/contributions`,
-            auth
-          )
-          .then((response) => {
-            setContributions(response.data)})
-          .catch(() => {
-            setFailed(true);
-          });
+      await axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_LOCATION}/${process.env.REACT_APP_API}/companies/${company.id}/contributions`,
+          auth
+        )
+        .then((response) => {
+          setContributions(response.data);
+        })
+        .catch(() => {
+          setFailed(true);
+        });
     };
     contributions();
   }, [failed]);
 
   const viewContribution = (contribution) => {
-    dispatch(setContribution(contribution))
+    dispatch(setContribution(contribution));
     history("/contributions/" + contribution.id);
   };
   if (contributions.length > 0) {
-  return (
-    <div>
-      <h2 className="mt-3">Contributions</h2>
-      <Table striped bordered responsive="xl">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Pull request</th>
-            <th>Merged</th>
-            <th>Work started</th>
-            <th>Value for distribution</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {contributions.map((contribution) => (
+    return (
+      <div>
+        <Card>
+          <Card.Header>
+            <h2 className="mt-3">Contributions</h2>
+          </Card.Header>
+        </Card>
+        <Table striped bordered responsive="xl">
+          <thead>
             <tr>
-              <td>{contribution.title}</td>
-              <td>{contribution.pull_request}</td>
-              <td>{contribution.merged ? 'Yes' : 'No'}</td>
-              <td>{contribution.accepted_for_start ? 'Yes' : 'No'}</td>
-              <td>{contribution.current_value ?  contribution.current_value : 0 } BTC</td>
-              <td>
-                <Nav.Link onClick={() => viewContribution(contribution)}>View</Nav.Link>
-              </td>
+              <th>Title</th>
+              <th>Pull request</th>
+              <th>Merged</th>
+              <th>Work started</th>
+              <th>Value for distribution</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
-  );} else{
-    return(
-      <div></div>
-    )
+          </thead>
+          <tbody>
+            {contributions.map((contribution) => (
+              <tr>
+                <td>{contribution.title}</td>
+                <td>{contribution.pull_request}</td>
+                <td>{contribution.merged ? "Yes" : "No"}</td>
+                <td>{contribution.accepted_for_start ? "Yes" : "No"}</td>
+                <td>{contribution.current_value ? contribution.current_value : 0} BTC</td>
+                <td>
+                  <Nav.Link onClick={() => viewContribution(contribution)}>View</Nav.Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+    );
+  } else {
+    return <div></div>;
   }
 };
 
