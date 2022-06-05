@@ -7,7 +7,7 @@ services:
 
     container_name: "dework_frontend"
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
       context: .
     ports:
       - "3000:3000"
