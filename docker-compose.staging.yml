@@ -3,8 +3,6 @@ services:
   react:
     image: registry.digitalocean.com/dework/react_staging:latest
     environment:
-      REACT_APP_BACKEND_LOCATION: logic-staging.tallypeer.com
-      REACT_APP_API: api/v1
       VIRTUAL_HOST: staging.tallypeer.com
       LETSENCRYPT_HOST: staging.tallypeer.com
 

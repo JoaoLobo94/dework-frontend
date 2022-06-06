@@ -5,6 +5,8 @@ WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
 RUN yarn install
+ENV REACT_APP_BACKEND_LOCATION=https://logic.tallypeer.com
+ENV REACT_APP_API=api/v1
 # Copy app files
 COPY . .
 # Expose port

@@ -3,8 +3,6 @@ services:
   react:
     image: registry.digitalocean.com/dework/react:latest
     environment:
-      REACT_APP_BACKEND_LOCATION: logic.tallypeer.com
-      REACT_APP_API: api/v1
       VIRTUAL_HOST: tallypeer.com
       LETSENCRYPT_HOST: tallypeer.com
 
