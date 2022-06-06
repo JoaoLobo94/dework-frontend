@@ -133,7 +133,7 @@ const SingleContribution = () => {
               <td>{contribution.accepted_for_start ? "Yes" : "No"}</td>
               <td>{owner.email}</td>
               <td>{owner.telegram}</td>
-              <td>{contribution.current_value ? contribution.current_value : 0} BTC</td>
+              <td>{contribution.current_value ? contribution.current_value : 0} SAT</td>
               <td>
                 <Nav.Link onClick={() => viewContribution(contribution)}>View</Nav.Link>
               </td>
@@ -163,7 +163,7 @@ const SingleContribution = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.telegram}</td>
-                <td>{contribution.current_value / users.length} BTC</td>
+                <td>{contribution.current_value / users.length} SAT</td>
               </tr>
             ))}
           </tbody>

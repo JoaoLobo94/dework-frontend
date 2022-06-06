@@ -59,7 +59,7 @@ const SingleCompanyPage = () => {
             <tr>
               <td>{company.id}</td>
               <td>{company.name}</td>
-              <td>{company.pub_key}</td>
+              <td>{company.wallet}</td>
               <td>
                 <a href={company.github}>Show</a>
               </td>

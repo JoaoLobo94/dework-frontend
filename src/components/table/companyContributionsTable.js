@@ -71,7 +71,7 @@ const CompanyContributionsTable = () => {
                 <td>{contribution.pull_request}</td>
                 <td>{contribution.merged ? "Yes" : "No"}</td>
                 <td>{contribution.accepted_for_start ? "Yes" : "No"}</td>
-                <td>{contribution.current_value ? contribution.current_value : 0} BTC</td>
+                <td>{contribution.current_value ? contribution.current_value : 0} SAT</td>
                 <td>
                   <Nav.Link onClick={() => viewContribution(contribution)}>View</Nav.Link>
                 </td>

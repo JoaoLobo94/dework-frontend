@@ -37,7 +37,7 @@ const UserNavType = () => {
     <div>
       <Row>
         <Col md="auto">
-          <Nav.Link onClick={() => getUserBalance()}> Your Balance: {balance} BTC</Nav.Link>
+          <Nav.Link onClick={() => getUserBalance()}> Your Balance: {balance} SAT</Nav.Link>
         </Col>
         <Col md="auto">
           {balance !== "###" ? (

@@ -27,7 +27,7 @@ const CompanyNavType = () => {
       )
       .then((res) => {
         if (res.status === 200) {
-          setBalance(res.data.balance);
+          setBalance(res.data);
         }
       })
       .catch((err) => {
@@ -38,7 +38,7 @@ const CompanyNavType = () => {
     <div>
       <Row>
         <Col md="auto">
-          <Nav.Link onClick={() => getCompanyBalance()}> Company Balance: {balance ? balance : 0} BTC</Nav.Link>
+          <Nav.Link onClick={() => getCompanyBalance()}> Company Balance: {balance ? balance : 0} SAT</Nav.Link>
         </Col>
         <Col>
           {balance !== "###" ? (

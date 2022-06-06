@@ -11,6 +11,7 @@ const ContributionVoteModal = () => {
   const contribution = useSelector((state) => state.contribution);
   const [show, setShow] = useState(false);
   const [tooBigVote, setTooBigVote] = useState(false);
+  const [newValue, setNewValue] = useState(0);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const credentials = useSelector((state) => state.credentials);
@@ -36,8 +37,11 @@ const ContributionVoteModal = () => {
         auth
       )
       .then((res) => {
+        console.log(res)
         if (res.status === 202) {
           setTooBigVote(true)
+        }else{
+          setNewValue(res.data)
         }
       })
   };
@@ -53,8 +57,9 @@ const ContributionVoteModal = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="btc">
               <Form.Label>Enter the amount that you think should be paid to all contributors.
-                Must be smaller than total company balance -> {company.balance} BTC
+                Must be smaller than total company balance -> {company.balance} SAT
               </Form.Label>
+              <Form.Label>Keep in mind you can only vote once per contribution, all other votes will be ignored.</Form.Label>
               <Form.Control
                 type="wallet"
                 onChange={(e) => setAmount(e.target.value)}
@@ -65,7 +70,10 @@ const ContributionVoteModal = () => {
             <Button type="submit">Save your vote</Button>
           </Form>
           <Modal.Body>
-            {tooBigVote ? 'Inserted value greater than total value of company, try funding the company or voting for a lower value' : ''}
+            {tooBigVote ? 'Error. You might have already voted, or tried to insert a value greater than the market capitalization of the company' : ''}
+          </Modal.Body>
+          <Modal.Body>
+            {newValue > 0 ? `New value of this contribution -> ${newValue}` : ''}
           </Modal.Body>
         </Modal.Body>
       </Modal>

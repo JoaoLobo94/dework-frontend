@@ -22,7 +22,7 @@ const CompanyFundModal = () => {
         <Modal.Body>
           <Row>
             <Col className="d-flex justify-content-md-center mb-3">
-            <QRCode value={company.pub_key} />
+            <QRCode value={company.wallet} />
             </Col>
           </Row>
         </Modal.Body>
