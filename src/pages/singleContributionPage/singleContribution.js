@@ -162,7 +162,7 @@ const SingleContribution = () => {
               <tr>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{contribution.telegram}</td>
+                <td>{user.telegram}</td>
                 <td>{contribution.current_value / users.length} BTC</td>
               </tr>
             ))}
@@ -187,7 +187,7 @@ const SingleContribution = () => {
               {contribution.accepted_for_start && user.id === contribution.creator ? (
                 <Button onClick={handleShow}>Add user to contribution</Button>
               ) : (
-                <Button className="disabled">You cannot add user to contribution</Button>
+                <Button className="disabled">You cannot add users to contribution</Button>
               )}
             </Col>
             <Col md="auto">
