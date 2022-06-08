@@ -57,7 +57,6 @@ const ContributionVoteModal = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="btc">
               <Form.Label>Enter the amount that you think should be paid to all contributors.
-                Must be smaller than total company balance -> {company.balance} SAT
               </Form.Label>
               <Form.Label>Keep in mind you can only vote once per contribution, all other votes will be ignored.</Form.Label>
               <Form.Control
