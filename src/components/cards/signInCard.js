@@ -103,7 +103,7 @@ const SignInCard = () => {
   if (tab === "signIn") {
     return (
       <Form className="d-flex justify-content-center mt-3" noValidate validated={validated} onSubmit={handleSubmit}>
-        <Card style={{ width: "30%" }}>
+        <Card>
           <Card.Header>
             <Nav fill variant="tabs">
               <Nav.Item>
@@ -149,7 +149,7 @@ const SignInCard = () => {
   } else {
     return (
       <Form className="d-flex justify-content-center mt-3" noValidate validated={validated} onSubmit={handleSubmit}>
-        <Card style={{ width: "30%" }}>
+        <Card>
           <Card.Header>
             <Nav fill variant="tabs">
               <Nav.Item>
