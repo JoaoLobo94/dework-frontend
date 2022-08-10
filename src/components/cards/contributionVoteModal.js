@@ -69,7 +69,7 @@ const ContributionVoteModal = () => {
             <Button type="submit">Save your vote</Button>
           </Form>
           <Modal.Body>
-            {tooBigVote ? 'Error. You might have already voted, or tried to insert a value greater than the market capitalization of the company' : ''}
+            {tooBigVote ? 'You do not have permission to set a value' : ''}
           </Modal.Body>
           <Modal.Body>
             {newValue > 0 ? `New value of this contribution -> ${newValue}` : ''}

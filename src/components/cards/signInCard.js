@@ -29,12 +29,12 @@ const SignInCard = () => {
     telegram: telegram,
   };
   const dispatch = useDispatch();
-  let credentials = {token: '', client: ''}
-  let user = {}
+  let credentials = { token: "", client: "" };
+  let user = {};
   const changeTab = () => {
-    setTab('signUp')
-    setError(false)
-  }
+    setTab("signUp");
+    setError(false);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -49,10 +49,10 @@ const SignInCard = () => {
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/sign_in`, signInForm)
         .then((res) => {
           if (res.status === 200) {
-            credentials.token = res.headers["access-token"]
-            credentials.client = res.headers["client"]
-            user = res.data.data
-            localStorage.setItem('token', credentials.token)
+            credentials.token = res.headers["access-token"];
+            credentials.client = res.headers["client"];
+            user = res.data.data;
+            localStorage.setItem("token", credentials.token);
             dispatch(setToken(credentials));
             dispatch(setUser(user));
             history("/companies");
@@ -60,17 +60,17 @@ const SignInCard = () => {
         })
         .catch((err) => {
           console.log(err);
-          setError(true)
+          setError(true);
         });
     } else {
       axios
         .post(`${process.env.REACT_APP_BACKEND_LOCATION}/auth/`, signUpForm)
         .then((res) => {
           if (res.status === 200) {
-            credentials.token = res.headers["access-token"]
-            credentials.client = res.headers["client"]
-            user = res.data.data
-            localStorage.setItem('token', credentials.token)
+            credentials.token = res.headers["access-token"];
+            credentials.client = res.headers["client"];
+            user = res.data.data;
+            localStorage.setItem("token", credentials.token);
             dispatch(setToken(credentials));
             dispatch(setUser(user));
             history("/companies");
@@ -78,7 +78,7 @@ const SignInCard = () => {
         })
         .catch((err) => {
           console.log(err);
-          setError(true)
+          setError(true);
         });
     }
   };
@@ -100,6 +100,10 @@ const SignInCard = () => {
       return true;
     }
   };
+
+  const handleResetPassword = () => {
+    history("/reset_password");
+  }
   if (tab === "signIn") {
     return (
       <Form className="d-flex justify-content-center mt-3" noValidate validated={validated} onSubmit={handleSubmit}>
@@ -142,7 +146,11 @@ const SignInCard = () => {
               </Form.Group>
             </Card.Text>
           </Card.Body>
-          <Button type="submit">{error ? "There was an error executing the request, check your input and click here to try again." : "Submit Form"}</Button>
+          <Button type="submit">
+            {error
+              ? "There was an error executing the request, check your email or password and click here to try again. Contact us if you forgot your password"
+              : "Submit Form"}
+          </Button>
         </Card>
       </Form>
     );
@@ -197,17 +205,18 @@ const SignInCard = () => {
                 />
                 <Form.Control.Feedback type="invalid">Please insert your email address</Form.Control.Feedback>
               </Form.Group>
-             <Card.Text>
-              <Form.Group className="mb-3">
-                <Form.Label>Telegram Number</Form.Label>
-                <Form.Control
-                  onChange={(e) => setTelegram(e.target.value)}
-                  value={telegram}
-                  type="telegram"
-                  placeholder="Enter your contact number"
-                />
-              </Form.Group>
-            </Card.Text></Card.Text>
+              <Card.Text>
+                <Form.Group className="mb-3">
+                  <Form.Label>Telegram Number</Form.Label>
+                  <Form.Control
+                    onChange={(e) => setTelegram(e.target.value)}
+                    value={telegram}
+                    type="telegram"
+                    placeholder="Enter your contact number"
+                  />
+                </Form.Group>
+              </Card.Text>
+            </Card.Text>
             <Card.Text>
               <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
@@ -236,7 +245,9 @@ const SignInCard = () => {
             </Card.Text>
           </Card.Body>
           <Button disabled={disableButton()} type="submit">
-             {error ? "There was an error executing the request, check your input and click here to try again." : checkMatchingPasswords()}
+            {error
+              ? "There was an error executing the request, check your input and click here to try again."
+              : checkMatchingPasswords()}
           </Button>
         </Card>
       </Form>

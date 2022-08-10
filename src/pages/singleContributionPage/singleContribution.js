@@ -177,21 +177,21 @@ const SingleContribution = () => {
         </Card>
           <Row>
             <Col md="auto">
-              {contribution.accepted_for_start || (user.id === company.owner) === false ? (
+              {contribution.accepted_for_start || (user.id === company.owner || user.super_admin) === false ? (
                 <Button className="disabled">Work Already started or you don't have permission</Button>
               ) : (
                 <Button onClick={() => acceptForWork()}>Accept work start</Button>
               )}
             </Col>
             <Col md="auto">
-              {contribution.accepted_for_start && user.id === contribution.creator ? (
+              {contribution.accepted_for_start &&(user.id === contribution.creator || user.super_admin) ? (
                 <Button onClick={handleShow}>Add user to contribution</Button>
               ) : (
                 <Button className="disabled">You cannot add users to contribution</Button>
               )}
             </Col>
             <Col md="auto">
-              {user.id === company.owner && !contribution.merged ? (
+              {(user.id === company.owner || user.super_admin) && !contribution.merged ? (
                 <Button onClick={() => finishAndPay()}>Finish and pay contributors</Button>
               ) : (
                 <Button className="disabled">You do not have permission to finish work or it has been payed</Button>
