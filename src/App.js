@@ -12,7 +12,7 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/login" element={<SignIn />} />
+          <Route path="/" element={<SignIn />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/companies" element={<Companies />} />
             <Route path="/companies/*" element={<SingleCompanyPage />} />
