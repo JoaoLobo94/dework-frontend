@@ -113,9 +113,9 @@ const SignInCard = () => {
               <Nav.Item>
                 <Nav.Link onClick={() => setTab("signIn")}>SignIn</Nav.Link>
               </Nav.Item>
-              {/* <Nav.Item>
+              <Nav.Item>
                 <Nav.Link onClick={() => changeTab()}>SignUp</Nav.Link>
-              </Nav.Item> */}
+              </Nav.Item>
             </Nav>
           </Card.Header>
           <Card.Body>
